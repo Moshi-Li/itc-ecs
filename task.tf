@@ -1,9 +1,9 @@
 resource "aws_ecs_task_definition" "this" {
+    depends_on = [aws_ecs_cluster.this]
     family = "itc-nginx-task"
     container_definitions =jsonencode([{
-        "name" : "nginx",
-        "image": "public.ecr.aws/docker/library/nginx:stable-perl",
-        "image" : "nginx"
+        "name" : var.image_name,
+        "image": var.image_url,
         "essential" : true
         "portMappings" : [
             {

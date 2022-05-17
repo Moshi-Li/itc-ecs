@@ -3,6 +3,7 @@ resource "aws_ecs_cluster" "this" {
 }
 
 
+
 resource "aws_ecs_service" "this" {
 
   depends_on = [aws_ecs_task_definition.this, aws_alb_target_group.this]
@@ -24,7 +25,7 @@ resource "aws_ecs_service" "this" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.this.arn
-    container_name   = aws_ecs_task_definition.this.family
+    container_name   = var.image_name
     container_port   = 80
   }
   
